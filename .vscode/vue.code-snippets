@@ -1,0 +1,33 @@
+{
+    "script setup": {
+        "scope": "vue",
+        "prefix": "script setup",
+        "body": [
+            "<script lang=\"ts\" setup>",
+            "const props = defineProps<{$1}>();",
+            "const emit = defineEmits([$2]);",
+            "</script>"
+        ],
+        "description": "Create <script setup> + <script> blocks"
+    },
+    "template": {
+        "scope": "vue",
+        "prefix": "template",
+        "body": [
+            "<template>",
+            "  $1",
+            "</template>"
+        ],
+        "description": "Create <template> block"
+    },
+    "style": {
+        "scope": "vue",
+        "prefix": "style",
+        "body": [
+            "<style scoped>",
+            "$1",
+            "</style>"
+        ],
+        "description": "Create <style> block"
+    },
+}

@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "eamodio.gitlens",
+    "formulahendry.auto-close-tag",
+    "formulahendry.auto-rename-tag",
+    "vs-publisher-1464889.veracode-greenlight-for-vs-code",
+    "voorjaar.windicss-intellisense",
+    "vue.volar",
+    "vue.vscode-typescript-vue-plugin"
+  ]
+}

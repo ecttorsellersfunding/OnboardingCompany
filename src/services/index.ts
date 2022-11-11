@@ -1,0 +1,5 @@
+export { default as menuService } from './menuService'
+export { default as partnerService } from './partnerService'
+export { default as spaService } from './spaService'
+export { default as userService } from './userService'
+export { default as cardsService } from './cardsService'

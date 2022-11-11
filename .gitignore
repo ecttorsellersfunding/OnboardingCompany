@@ -1,0 +1,33 @@
+# MISC
+.DS_Store
+.vite-ssg-dist
+.vite-ssg-temp
+dist
+dist-ssr
+node_modules
+.idea/
+public/index.html
+auth.json
+
+# Local Files
+*.local
+.env
+
+# Lock Files
+package-lock.*
+pnpm-lock.yaml
+yalc.lock
+
+# Log Files
+*.log
+
+# Testing Library
+coverage
+
+## Playwright
+playwright-report
+test-results
+tests/mocks/storage.json
+
+# YALC
+.yalc

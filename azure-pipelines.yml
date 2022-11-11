@@ -1,0 +1,105 @@
+# trigger:
+#   - main
+#   - staging
+#   - dev
+
+pool:
+  name: Azure Pipelines
+  vmImage: "ubuntu-latest"
+
+variables:
+  ${{ if eq(variables['Build.SourceBranchName'], 'main') }}:
+    env_name: prod
+  ${{ elseif eq(variables['Build.SourceBranchName'], 'staging') }}:
+    env_name: staging
+  ${{ elseif eq(variables['Build.SourceBranchName'], 'dev') }}:
+    env_name: dev
+  ${{ else }}:
+    env_name: test
+
+stages:
+- stage: Build
+  jobs:
+  - job: PR_Build
+    condition: eq(variables.env_name, 'test')
+    steps:
+      - task: Bash@3
+        displayName: "Create .env"
+        inputs:
+          targetType: "inline"
+          script: |
+            cp .env.dev .env.production
+      - task: replacetokens@4
+        displayName: "Replace Tokens on .env.production"
+        inputs:
+          targetFiles: "**/*.env.production"
+          encoding: "auto"
+          tokenPattern: "default"
+          writeBOM: true
+          actionOnMissing: "warn"
+          keepToken: false
+          actionOnNoFiles: "warn"
+          enableTransforms: false
+          useLegacyPattern: false
+          enableTelemetry: true
+
+      - task: Yarn@3
+        displayName: Install dependencies
+        inputs:
+          arguments: 'install'
+
+      - script: |
+          yarn test:coverage
+        displayName: "Running Tests"
+
+      - script: |
+          yarn build
+        displayName: "Build the Project"
+
+  # - job: Build
+  #   condition: ne(variables.env_name, 'test')
+  #   steps:
+  #     - task: Bash@3
+  #       displayName: "Create .env"
+  #       condition: ne(variables.env_name, 'prod')
+  #       inputs:
+  #         targetType: "inline"
+  #         script: |
+  #            cp .env.$(env_name) .env.production
+
+  #     - task: replacetokens@4
+  #       displayName: "Replace Tokens on .env.production"
+  #       inputs:
+  #         targetFiles: "**/*.env.production"
+  #         encoding: "auto"
+  #         tokenPattern: "default"
+  #         writeBOM: true
+  #         actionOnMissing: "warn"
+  #         keepToken: false
+  #         actionOnNoFiles: "warn"
+  #         enableTransforms: false
+  #         useLegacyPattern: false
+  #         enableTelemetry: true
+
+  #     - task: Yarn@3
+  #       displayName: Install dependencies
+  #       inputs:
+  #         arguments: 'install'
+
+  #     - script: |
+  #         yarn build
+  #       displayName: "Build the Project"
+
+  #     - task: ArchiveFiles@2
+  #       displayName: "Archive Files"
+  #       inputs:
+  #         rootFolderOrFile: "$(Build.SourcesDirectory)/dist"
+  #         archiveType: "zip"
+  #         archiveFile: "$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip"
+  #         replaceExistingArchive: true
+
+  #     - task: PublishBuildArtifacts@1
+  #       displayName: "Upload Artifacts"
+  #       inputs:
+  #         ArtifactName: Boilerplate
+

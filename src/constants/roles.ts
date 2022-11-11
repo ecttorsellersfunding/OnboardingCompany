@@ -1,0 +1,52 @@
+const VIEWER = [
+  'CanDWBalance',
+  'CanDWViewTransactions',
+  'CanViewBankAccount',
+  'CanViewCardTransactions',
+  'CanViewCompany',
+  'CanViewDetailsApplication',
+  'CanViewGuestUser',
+  'CanViewMarketPlace',
+  'CanViewOwner',
+  'CanViewSchedule',
+]
+
+const MANAGER = [...VIEWER,
+  'CanAcceptedProposal',
+  'CanAddDWFunds',
+  'CanAddFundsCard',
+  'CanAddNewCard',
+  'CanAgreement',
+  'CanApplyApplication',
+  'CanCancelCard',
+  'CanDWConvertion',
+  'CanDWQuickPay',
+  'CanDWRecipients',
+  'CanDWScheduleToPay',
+  'CanDWWithdraw',
+  'CanEditVAT',
+  'CanMakeDraws',
+  'CanPaymentVAT',
+  'CanReplaceCard',
+  'CanSuspendCard',
+  'CanViewCardInfos',
+  'CanViewOwner',
+]
+
+const SUPER_MANAGER = [...MANAGER,
+  'CanAddBankAccount',
+  'CanAddMarketPlace',
+  'CanAddOwner',
+  'CanEditBankAccount',
+  'CanEditCompany',
+  'CanEditOwner',
+  'CanViewSensitiveDataCompany',
+  'CanViewSensitiveDataMarketPlace',
+  'CanViewSensitiveDataOwner',
+]
+
+export const ROLES = {
+  VIEWER,
+  MANAGER,
+  SUPER_MANAGER,
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+
+<body style="margin: 0">
+  <script type="module">
+    import { registerApplication, start } from 'https://cdn.jsdelivr.net/npm/single-spa@5.9.0/lib/es2015/single-spa.dev.js'
+    import { MFE } from '~/constants'
+
+    const appUrl = import.meta.env?.DEV ? '/src/main.ts' : `${MFE.URL}main.js`
+
+    const link = document.createElement('link')
+    link.rel = 'stylesheet'
+    link.href = import.meta.env?.DEV ? '/variables.css' : `${MFE.URL}variables.css`
+    document.head.appendChild(link)
+
+    registerApplication({
+      name: MFE.NAME,
+      app: () => import(/* @vite-ignore */ appUrl),
+      activeWhen: ['/'],
+      customProps: () => ({
+        portalName: MFE.NAME,
+      }),
+    })
+
+    start({
+      urlRerouteOnly: true,
+    })
+  </script>
+  <script src="https://kit.fontawesome.com/678952280d.js" type="module" crossorigin="anonymous"></script>
+</body>
+
+</html>

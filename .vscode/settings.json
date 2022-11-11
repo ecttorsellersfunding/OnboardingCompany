@@ -1,0 +1,19 @@
+{
+  "prettier.enable": false,
+  "vetur.validation.template": false,
+  "vetur.validation.script": false,
+  "vetur.validation.style": false,
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "volar.tsPlugin": true,
+  "files.eol": "\n",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+  },
+  "editor.formatOnSave": false,
+  "files.associations": {
+    "*.css": "postcss",
+  },
+  "volar.codeLens.scriptSetupTools": true,
+  "volar.icon.finder": true,
+  "volar.icon.preview": true,
+}
